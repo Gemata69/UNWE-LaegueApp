@@ -1,0 +1,69 @@
+﻿body {
+    background-color: #050505;
+    color: #E2E8F0;
+}
+
+h2 {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+hr {
+    border-color: #00A8FF;
+    opacity: 0.5;
+}
+
+.form-label {
+    color: #00A8FF;
+}
+
+.form-control {
+    background-color: #001229 !important;
+    border: 1px solid rgba(0, 168, 255, 0.4) !important;
+    color: #FFFFFF !important;
+}
+
+    .form-control:focus {
+        background-color: #001B3A !important;
+        color: #FFFFFF !important;
+        border-color: #00A8FF !important;
+        outline: 4px solid #FFBB00 !important;
+        outline-offset: 2px !important;
+        box-shadow: none !important;
+    }
+
+.text-danger {
+    color: #FF4D4D !important;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #00A8FF !important;
+    border-color: #00A8FF !important;
+    color: #001B3A !important;
+    font-weight: bold;
+}
+
+    .btn-primary:hover {
+        background-color: #008ECC !important;
+    }
+
+.btn-secondary {
+    background-color: #334155 !important;
+    border-color: #334155 !important;
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+    .btn-secondary:hover {
+        background-color: #475569 !important;
+        color: #FFFFFF !important;
+    }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 4px solid #FFBB00 !important;
+    outline-offset: 4px !important;
+    box-shadow: none !important;
+}

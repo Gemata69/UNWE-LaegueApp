@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization; 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -29,10 +29,30 @@ namespace UNWE_LaegueApp.Pages.Admin
 
         public async Task<IActionResult> OnPostDeleteTeamAsync(int teamId)
         {
-            var team = await _context.Teams.FindAsync(teamId);
+            var team = await _context.Teams
+                .Include(t => t.Players)
+                .FirstOrDefaultAsync(t => t.Id == teamId);
 
             if (team != null)
             {
+                var relatedGames = _context.Games
+                    .Where(g => g.TeamOneId == teamId || g.TeamTwoId == teamId)
+                    .ToList();
+
+                if (relatedGames.Any())
+                {
+                    _context.Games.RemoveRange(relatedGames);
+                }
+
+                team.CaptainId = null;
+
+                if (team.Players != null && team.Players.Any())
+                {
+                    team.Players.Clear();
+                }
+
+                await _context.SaveChangesAsync();
+
                 _context.Teams.Remove(team);
                 await _context.SaveChangesAsync();
             }

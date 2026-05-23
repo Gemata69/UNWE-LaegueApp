@@ -1,0 +1,93 @@
+﻿body {
+    background-color: #050505;
+    color: #E2E8F0;
+}
+
+.card {
+    background-color: #001B3A !important;
+    border: 1px solid rgba(0, 168, 255, 0.2) !important;
+    border-radius: 12px;
+}
+
+.card-header {
+    background-color: #001229 !important;
+    border-bottom: 2px solid #00A8FF !important;
+}
+
+    .card-header h2 {
+        color: #FFFFFF !important;
+        font-weight: 700;
+    }
+
+.table {
+    color: #E2E8F0 !important;
+    margin-bottom: 0;
+}
+
+    .table thead.table-light th {
+        background-color: #001229 !important;
+        color: #00A8FF !important;
+        border-bottom: 2px solid #00A8FF !important;
+        font-weight: 600;
+    }
+
+    .table td, .table th {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+.table-hover tbody tr:hover td {
+    background-color: rgba(0, 168, 255, 0.15) !important;
+    color: #FFFFFF !important;
+}
+
+.badge.bg-warning {
+    background-color: #FFBB00 !important;
+    color: #000000 !important;
+    font-size: 0.9rem;
+    padding: 0.5em 0.7em;
+}
+
+.badge.bg-secondary {
+    background-color: #334155 !important;
+    color: #FFFFFF !important;
+    font-size: 0.9rem;
+    padding: 0.5em 0.7em;
+}
+
+.btn-primary {
+    background-color: #00A8FF !important;
+    border-color: #00A8FF !important;
+    color: #001B3A !important;
+    font-weight: bold;
+}
+
+    .btn-primary:hover {
+        background-color: #008ECC !important;
+    }
+
+.btn-outline-primary {
+    color: #00A8FF !important;
+    border-color: #00A8FF !important;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #00A8FF !important;
+        color: #001B3A !important;
+    }
+
+.btn-outline-danger {
+    color: #FF4D4D !important;
+    border-color: #FF4D4D !important;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #FF4D4D !important;
+        color: #FFFFFF !important;
+    }
+
+a:focus-visible,
+button:focus-visible {
+    outline: 4px solid #FFBB00 !important;
+    outline-offset: 4px !important;
+    box-shadow: none !important;
+}
