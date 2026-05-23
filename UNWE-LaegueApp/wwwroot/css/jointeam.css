@@ -1,0 +1,231 @@
+﻿.join-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 2rem 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.join-content-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+:focus-visible {
+    outline: 3px solid #FFBB00 !important;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.status-card {
+    background-color: #001B3A;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border-top: 5px solid transparent;
+}
+
+.status-icon-wrapper {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.status-text {
+    font-size: 1.1rem;
+    color: #A0B0C0;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.warning-card {
+    border-top-color: #FFBB00;
+}
+
+    .warning-card .status-icon-wrapper {
+        color: #FFBB00;
+    }
+
+.highlight-warning {
+    color: #FFBB00;
+}
+
+.success-card {
+    border-top-color: #00E676;
+}
+
+    .success-card .status-icon-wrapper {
+        color: #00E676;
+    }
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+}
+
+.warning-btn {
+    background-color: #FFBB00;
+    color: #050505;
+}
+
+    .warning-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 187, 0, 0.3);
+        color: #050505;
+    }
+
+.success-btn {
+    background-color: #00E676;
+    color: #050505;
+}
+
+    .success-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 230, 118, 0.3);
+        color: #050505;
+    }
+
+.join-card {
+    background-color: #001B3A;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    border: 1px solid rgba(0, 168, 255, 0.2);
+}
+
+.join-header {
+    background: linear-gradient(135deg, #003366, #001B3A);
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 168, 255, 0.1);
+    text-align: center;
+}
+
+.join-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 0.5rem 0;
+}
+
+.join-subtitle {
+    color: #A0B0C0;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.join-body {
+    padding: 2rem;
+}
+
+.error-summary {
+    background-color: rgba(255, 77, 77, 0.1);
+    color: #FF4D4D;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border-left: 4px solid #FF4D4D;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 700;
+    color: #00A8FF;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select {
+    width: 100%;
+    appearance: none;
+    background-color: #050505;
+    color: #FFFFFF;
+    border: 2px solid rgba(0, 168, 255, 0.3);
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    .custom-select:hover {
+        border-color: #00A8FF;
+    }
+
+    .custom-select:focus {
+        outline: none;
+        border-color: #00A8FF;
+        box-shadow: 0 0 10px rgba(0, 168, 255, 0.4);
+    }
+
+    .custom-select option {
+        background-color: #050505;
+        color: #FFFFFF;
+        padding: 10px;
+    }
+
+.select-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00A8FF;
+    pointer-events: none; 
+}
+
+.submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #00A8FF, #0077B6);
+    color: #FFFFFF;
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 168, 255, 0.3);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }

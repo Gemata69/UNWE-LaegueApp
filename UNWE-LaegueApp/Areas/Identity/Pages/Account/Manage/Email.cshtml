@@ -1,0 +1,202 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Управление на имейл";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<style>
+    
+    .email-content-wrapper {
+        margin-top: 0; 
+    }
+
+        .email-content-wrapper .form-card {
+            background-color: #001B3A;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 0;
+        }
+
+        .email-content-wrapper .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .email-content-wrapper .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .email-content-wrapper .form-label {
+            display: block;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        .email-content-wrapper .input-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .email-content-wrapper .custom-input {
+            width: 100%;
+            background-color: #050505;
+            color: #FFFFFF;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            min-height: 48px;
+            transition: all 0.3s ease;
+        }
+
+            .email-content-wrapper .custom-input:focus {
+                outline: none;
+                border-color: #38BDF8;
+                box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            }
+
+            .email-content-wrapper .custom-input:disabled {
+                background-color: rgba(255, 255, 255, 0.05);
+                color: #CBD5E1;
+                border-color: rgba(255, 255, 255, 0.05);
+                cursor: not-allowed;
+                opacity: 1;
+            }
+
+        .email-content-wrapper .success-badge {
+            position: absolute;
+            right: 15px;
+            color: #4ADE80;
+            font-size: 1.5rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(74, 222, 128, 0.15);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+        }
+
+        .email-content-wrapper .btn-verify-link {
+            background: none;
+            border: none;
+            color: #38BDF8;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: underline;
+            padding: 10px 0 0 0;
+            cursor: pointer;
+            transition: color 0.2s;
+            text-align: left;
+        }
+
+            .email-content-wrapper .btn-verify-link:hover {
+                color: #FFFFFF;
+            }
+
+            .email-content-wrapper .btn-verify-link:focus-visible {
+                outline: 2px solid #FFBB00;
+                outline-offset: 2px;
+                border-radius: 4px;
+            }
+
+        .email-content-wrapper .submit-btn {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #0284C7, #0369A1);
+            color: #FFFFFF;
+            border: none;
+            padding: 16px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 48px;
+        }
+
+            .email-content-wrapper .submit-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
+                background: linear-gradient(90deg, #0369A1, #075985);
+            }
+
+        .email-content-wrapper .text-danger {
+            color: #F87171 !important;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: block;
+        }
+</style>
+
+<div class="email-content-wrapper">
+    <div class="form-card">
+        <h2 class="section-title"><span aria-hidden="true"></span> @ViewData["Title"]</h2>
+
+        <partial name="_StatusMessage" for="StatusMessage" />
+
+        <form id="email-form" method="post">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            
+            @if (Model.IsEmailConfirmed)
+            {
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Текущ имейл</label>
+                    <div class="input-wrapper">
+                        <input asp-for="Email" class="custom-input" placeholder="Вашият имейл..." disabled />
+                        <span class="success-badge" title="Имейлът е потвърден" aria-label="Потвърден">✓</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Текущ имейл</label>
+                    <div class="input-wrapper">
+                        <input asp-for="Email" class="custom-input" placeholder="Вашият имейл..." disabled />
+                    </div>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn-verify-link">
+                        Изпрати линк за потвърждение на имейла
+                    </button>
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="Input.NewEmail" class="form-label">Нов имейл</label>
+                <div class="input-wrapper">
+                    <input asp-for="Input.NewEmail" class="custom-input" autocomplete="email" aria-required="true" placeholder="Въведете новия имейл адрес..." />
+                </div>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="submit-btn mt-3">
+                <span aria-hidden="true"></span> Смени имейла
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

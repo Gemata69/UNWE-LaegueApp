@@ -1,0 +1,70 @@
+﻿@page "{id:int}"
+@model UNWE_LaegueApp.Pages.League.DetailsModel
+@{
+    ViewData["Title"] = "Детайли за отбор";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0"> Отбор: @Model.Team.Name</h2>
+        </div>
+        <div class="card-body">
+            <h4 class="mb-3"> Актуален състав</h4>
+            <table class="table table-hover border">
+                <thead class="table-light">
+                    <tr>
+                        <th>Име и Фамилия</th>
+                        <th>Роля</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th class="text-center">Действия</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var player in Model.Team.Players)
+                    {
+                        var profile = Model.PlayerProfiles.FirstOrDefault(up => up.UserId == player.UserId);
+                        <tr>
+                            <td class="fw-bold align-middle">
+                                @(profile != null ? profile.FullName : "Профилът не е попълнен")
+                            </td>
+                            <td class="align-middle">
+                                @if (player.Id == Model.Team.CaptainId || player.Captain)
+                                {
+                                    <span class="badge bg-warning text-dark">©️ Капитан</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary text-white">Играч</span>
+                                }
+                            </td>
+                            
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td class="text-center align-middle">
+                                    <form method="post" asp-page-handler="KickPlayer" onsubmit="return confirm('Сигурни ли сте, че искате да изгоните този играч?');">
+                                        <input type="hidden" name="playerId" value="@player.Id" />
+                                        <input type="hidden" name="teamId" value="@Model.Team.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">🥾 Изгони</button>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <a asp-page="/League/Standings" class="btn btn-outline-primary">← Обратно към класирането</a>
+                
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-page="/Team/EditTeam" asp-route-id="@Model.Team.Id" class="btn btn-primary">✏️ Редактирай Отбора</a>
+                }
+            </div>
+            
+        </div>
+    </div>
+</div>

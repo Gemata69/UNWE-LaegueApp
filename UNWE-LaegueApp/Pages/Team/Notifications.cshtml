@@ -1,0 +1,55 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Team.NotificationsModel
+@{
+    ViewData["Title"] = "Известия";
+}
+
+<link rel="stylesheet" href="~/css/notifications.css" asp-append-version="true" />
+
+<main class="notifications-main-container">
+    
+    <header class="notifications-header">
+        <h1 class="page-title">
+            <span aria-hidden="true"></span> Твоите известия
+        </h1>
+    </header>
+
+    @if (!Model.MyNotifications.Any())
+    {
+        <div class="empty-state-card" role="status">
+            <i class="fas fa-bell-slash empty-icon" aria-hidden="true"></i>
+            <p>В момента нямате нови известия.</p>
+        </div>
+    }
+    else
+    {
+        <ul class="notifications-list" aria-label="Списък с вашите известия">
+            @foreach (var note in Model.MyNotifications)
+            {
+                bool isApproved = note.Status == "Approved";
+                string statusClass = isApproved ? "status-approved" : "status-rejected";
+                string badgeClass = isApproved ? "badge-success" : "badge-danger";
+                string iconClass = isApproved ? "fa-check-circle" : "fa-times-circle";
+                string statusText = isApproved ? "ОДОБРЕНА" : "ОТХВЪРЛЕНА";
+
+                <li class="notification-item @statusClass">
+                    <div class="notification-content">
+                        <span class="notification-text">
+                            Отговор на заявката ти за отбор <strong class="team-highlight">@(note.Team?.Name ?? "Неизвестен")</strong>:
+                        </span>
+                        
+                        <span class="status-badge @badgeClass">
+                            <i class="fas @iconClass" aria-hidden="true"></i> @statusText
+                        </span>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <form method="post" class="clear-notifications-form">
+            <button type="submit" asp-page-handler="Clear" class="clear-btn" aria-label="Изчисти всички известия от списъка">
+                <i class="fas fa-broom" aria-hidden="true"></i> Изчисти известията
+            </button>
+        </form>
+    }
+</main>

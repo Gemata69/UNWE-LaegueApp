@@ -1,0 +1,118 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Политика за поверителност";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<style>
+    
+    :root {
+        --bg-color: #050505;
+        --bg-surface: #001B3A;
+        --text-color: #F0F4F8;
+        --primary-light: #00A8FF;
+        --primary-dark: #003366;
+        --focus-color: #FFBB00;
+        --error-color: #FF4D4D;
+        --success-color: #00E676;
+        --accessible-blue: #80D4FF;
+    }
+
+    .privacy-container {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        padding: 2rem;
+        margin-top: 1.5rem;
+        border-radius: 8px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .privacy-card {
+        background-color: var(--bg-surface);
+        border-left: 4px solid var(--accessible-blue);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+    }
+
+    .privacy-container h2 {
+        color: var(--accessible-blue);
+        font-size: 1.4rem;
+        margin-top: 0px;
+        margin-bottom: 1rem;
+    }
+
+    .privacy-container a {
+        color: var(--accessible-blue);
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+        .privacy-container a:hover {
+            color: var(--text-color);
+        }
+
+        .privacy-container a:focus, .privacy-container button:focus {
+            outline: 3px solid var(--focus-color) !important;
+            outline-offset: 2px;
+            background-color: var(--bg-surface);
+        }
+
+    .accessibility-badge {
+        display: inline-block;
+        background-color: var(--success-color);
+        color: var(--bg-color);
+        font-weight: bold;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    
+    .privacy-container code {
+        background-color: var(--bg-color) !important; 
+        color: var(--focus-color) !important; 
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+        font-weight: bold;
+        border: 1px solid var(--primary-dark);
+    }
+</style>
+
+<div class="privacy-container" aria-label="Политика за поверителност на приложението">
+    
+    <div class="accessibility-badge" role="status">
+         Съвместимост с EN 301 549 (AAA Контраст)
+    </div>
+
+    <p>Последна промяна: Май, 2026 г. в съответствие с GDPR (Регламент (ЕС) 2016/679).</p>
+
+    <section class="privacy-card" role="region" aria-labelledby="section1">
+        <h2 id="section1">1. Обща информация и събирани данни</h2>
+        <p>Платформата „UNWE League“ съхранява информация, необходима за легитимното провеждане на студентските футболни турнири. Обработваните данни в таблица <code>UserProfile</code> включват потребителско име, факултетен номер, служебен имейл и телефонен номер.</p>
+    </section>
+
+    <section class="privacy-card" role="region" aria-labelledby="section2">
+        <h2 id="section2">2. Сигурност и Журнал на промените (Audit Trail)</h2>
+        <p>За целите на сигурността и предотвратяване на злоупотреби, всяко административно действие (въвеждане на резултат, трансфер) се записва автоматично в защитената одитна таблица <code>log_22180023</code>. Данните за паролите се съхраняват в криптиран вид чрез PBKDF2 алгоритъм през подсистемата <em>ASP.NET Core Identity</em>.</p>
+    </section>
+
+    <section class="privacy-card" role="region" aria-labelledby="section3">
+        <h2 id="section3">3. Изявление за софтуерна достъпност</h2>
+        <p>Интерфейсът на тази страница и цялото приложение е проектиран с мисъл за потребители с увреждания:</p>
+        <ul>
+            <li><strong>Висок визуален контраст:</strong> Съотношението на контраста между основния текст (<code>#F0F4F8</code>) и черния фон (<code>#050505</code>) надхвърля съотношението 20:1, покривайки най-високия стандарт WCAG AAA.</li>
+            <li><strong>Клавиатурна навигация:</strong> Всички интерактивни елементи и линкове се маркират с ярък кехлибарен фокус (<code>#FFBB00</code>) при преминаване с клавиша <code>TAB</code>.</li>
+            <li><strong>Екранни четци:</strong> Използвани са семантични HTML5 тагове за безпроблемно разчитане от софтуер за незрящи.</li>
+        </ul>
+    </section>
+
+    <p>Ако имате въпроси относно Вашите данни, можете да се свържете с Администратора на „UNWE League“ на адрес: <a href="mailto:support@@unwe.bg">support@@unwe.bg</a>.</p>
+</div>

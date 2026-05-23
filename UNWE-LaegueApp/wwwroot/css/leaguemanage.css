@@ -1,0 +1,148 @@
+﻿.manage-season-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    padding: 2rem 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+:focus-visible {
+    outline: 3px solid #FFBB00 !important;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.action-card {
+    background-color: #001B3A;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(0, 168, 255, 0.2);
+    border-top: 5px solid #FF4D4D; 
+}
+
+.icon-pulse-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.giant-icon {
+    font-size: 4rem;
+    display: inline-block;
+    animation: rotateGear 10s linear infinite;
+}
+
+@keyframes rotateGear {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.action-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-description {
+    color: #A0B0C0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.alert-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(255, 77, 77, 0.1);
+    border-left: 4px solid #FF4D4D;
+    color: #FF4D4D;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.alert-icon {
+    font-size: 1.5rem;
+}
+
+.generate-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #FF4D4D, #D32F2F); 
+    color: #FFFFFF;
+    border: none;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 900;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+}
+
+    .generate-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(255, 77, 77, 0.5);
+        background: linear-gradient(90deg, #FF6666, #E53935);
+    }
+
+    .generate-btn:active {
+        transform: translateY(2px) scale(0.98);
+    }
+
+.btn-icon {
+    font-size: 1.5rem;
+}
+
+.back-link-wrapper {
+    margin-top: 2rem;
+}
+
+.cancel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #A0B0C0;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+    .cancel-link:hover {
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+
+@media (max-width: 768px) {
+    .action-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .action-title {
+        font-size: 1.8rem;
+    }
+
+    .generate-btn {
+        font-size: 1.1rem;
+        padding: 16px;
+    }
+}

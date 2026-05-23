@@ -1,0 +1,322 @@
+﻿.schedule-main-container {
+    max-width: 1200px;
+    margin: 2rem auto 5rem;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+    color: #F0F4F8;
+}
+
+:focus-visible {
+    outline: 3px solid #FFBB00 !important;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.filter-section {
+    background-color: #001B3A;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(0, 168, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+.filter-label {
+    display: block;
+    font-weight: 700;
+    color: #00A8FF;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper, .select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00A8FF;
+    pointer-events: none;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00A8FF;
+    pointer-events: none;
+}
+
+.custom-input, .custom-select {
+    width: 100%;
+    background-color: #050505;
+    color: #FFFFFF;
+    border: 2px solid rgba(0, 168, 255, 0.3);
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.custom-input {
+    padding-left: 40px;
+}
+
+.custom-select {
+    appearance: none;
+    cursor: pointer;
+}
+
+    .custom-input:focus, .custom-select:focus {
+        border-color: #00A8FF;
+        box-shadow: 0 0 10px rgba(0, 168, 255, 0.4);
+    }
+
+.form-action {
+    min-width: 150px;
+}
+
+.submit-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #00A8FF, #0077B6);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+    }
+
+.week-card {
+    background-color: #001B3A;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(0, 168, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.week-header {
+    background: linear-gradient(135deg, #003366, #001B3A);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #00A8FF;
+}
+
+.week-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.game-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background-color 0.2s;
+}
+
+    .game-row:hover {
+        background-color: rgba(0, 168, 255, 0.05);
+    }
+
+    .game-row:last-child {
+        border-bottom: none;
+    }
+
+.team-name {
+    width: 30%;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.team-left {
+    text-align: left;
+}
+
+.team-right {
+    text-align: right;
+}
+
+.team-name mark {
+    background-color: #FFBB00 !important;
+    color: #050505 !important;
+    padding: 2px 4px !important;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(255, 187, 0, 0.5);
+}
+
+.game-center {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.score-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge-date {
+    background-color: rgba(0, 168, 255, 0.15);
+    color: #00A8FF;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid rgba(0, 168, 255, 0.3);
+}
+
+.badge-pending {
+    background-color: rgba(160, 176, 192, 0.1);
+    color: #A0B0C0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.admin-datetime-input {
+    background-color: #050505;
+    color: #FFFFFF;
+    border: 1px solid #00A8FF;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.score-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.score-display {
+    background-color: #050505;
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    font-weight: 900;
+    padding: 6px 16px;
+    border-radius: 6px;
+    min-width: 50px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.score-divider {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #00A8FF;
+}
+
+.score-input {
+    width: 60px;
+    text-align: center;
+    background-color: #050505;
+    color: #FFFFFF;
+    border: 2px solid #00A8FF;
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+    .score-input:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+    }
+
+.save-score-btn {
+    background-color: #00E676;
+    color: #050505;
+    border: none;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-left: 10px;
+}
+
+    .save-score-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
+    }
+
+@media (max-width: 768px) {
+    .game-row {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .team-name {
+        width: 100%;
+        text-align: center;
+    }
+
+    .game-center {
+        width: 100%;
+    }
+}
+
+.admin-datetime-input::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.9);
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+    .admin-datetime-input::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: invert(1) brightness(1) sepia(1) hue-rotate(180deg) saturate(3);
+    }

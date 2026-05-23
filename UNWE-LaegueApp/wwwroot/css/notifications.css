@@ -1,0 +1,161 @@
+﻿.notifications-main-container {
+    max-width: 800px; 
+    margin: 2rem auto 5rem;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+    color: #F0F4F8;
+}
+
+
+:focus-visible {
+    outline: 3px solid #FFBB00 !important;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.notifications-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.empty-state-card {
+    background-color: #001B3A;
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    text-align: center;
+    border: 1px dashed rgba(0, 168, 255, 0.3);
+    color: #A0B0C0;
+    font-size: 1.2rem;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: rgba(0, 168, 255, 0.5);
+    margin-bottom: 1rem;
+}
+
+.notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.notification-item {
+    background-color: #001B3A;
+    border-radius: 8px;
+    padding: 20px 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .notification-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+.status-approved {
+    border-left: 5px solid #00E676;
+}
+
+.status-rejected {
+    border-left: 5px solid #FF4D4D;
+}
+
+.notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.notification-text {
+    font-size: 1.1rem;
+    color: #E0E8F0;
+    line-height: 1.5;
+}
+
+.team-highlight {
+    color: #00A8FF;
+    font-weight: 800;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background-color: rgba(0, 230, 118, 0.15);
+    color: #00E676;
+    border: 1px solid rgba(0, 230, 118, 0.3);
+}
+
+.badge-danger {
+    background-color: rgba(255, 77, 77, 0.15);
+    color: #FF4D4D;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+.clear-notifications-form {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.clear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    color: #A0B0C0;
+    border: 2px solid #A0B0C0;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .clear-btn:hover {
+        background-color: #A0B0C0;
+        color: #050505;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(160, 176, 192, 0.2);
+    }
+
+@media (max-width: 600px) {
+    .notification-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .clear-notifications-form {
+        justify-content: center;
+    }
+
+    .clear-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

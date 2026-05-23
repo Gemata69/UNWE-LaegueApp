@@ -1,0 +1,135 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.League.ScheduleModel
+@{
+    ViewData["Title"] = "Програма";
+}
+<link rel="stylesheet" href="~/css/schedule.css" asp-append-version="true" />
+
+<main class="schedule-main-container">
+    
+    <header class="schedule-header">
+        <h1 class="page-title">
+            <span aria-hidden="true"></span> Програма и Резултати
+        </h1>
+    </header>
+
+    <section class="filter-section" aria-label="Панел за търсене и сортиране">
+        <form method="get" class="filter-form">
+            
+            <div class="form-group">
+                <label for="SearchTermInput" class="filter-label">Търси мачове на отбор:</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-search input-icon" aria-hidden="true"></i>
+                    <input type="text" id="SearchTermInput" name="SearchTerm" value="@Model.SearchTerm" class="custom-input" placeholder="Въведи име на отбор...">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="SortOrderSelect" class="filter-label">Сортирай седмиците:</label>
+                <div class="select-wrapper">
+                    <select id="SortOrderSelect" name="SortOrder" class="custom-select">
+                        <option value="asc" selected="@(Model.SortOrder == "asc")">От 1-ва към последна</option>
+                        <option value="desc" selected="@(Model.SortOrder == "desc")">От последна към 1-ва</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-icon" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="form-action">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-filter" aria-hidden="true"></i> Филтрирай
+                </button>
+            </div>
+            
+        </form>
+    </section>
+
+    <div class="weeks-container">
+        @if (!Model.Weeks.Any())
+        {
+            <div class="no-results-message">
+                <h3>Няма намерени мачове.</h3>
+                <p>Опитайте да потърсите с друго име.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var week in Model.Weeks)
+            {
+                <section class="week-card" aria-label="СЕДМИЦА @week.Key">
+                    <header class="week-header">
+                        <h2 class="week-title">СЕДМИЦА @week.Key</h2>
+                    </header>
+                    
+                    <div class="games-list">
+                        @foreach (var game in week)
+                        {
+                            <article class="game-row">
+                                
+                                <div class="team-name team-left">
+                                    @game.TeamOne.Name
+                                </div>
+                                
+                                <div class="game-center">
+                                    <form method="post" asp-page-handler="UpdateScore" class="score-form">
+                                        <input type="hidden" name="gameId" value="@game.Id" />
+                                        <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
+                                        <input type="hidden" name="SortOrder" value="@Model.SortOrder" />
+                                        
+                                        <div class="datetime-wrapper">
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <input name="startTime" type="datetime-local"
+                                                       value="@(game.StartTime?.ToString("yyyy-MM-ddTHH:mm"))"
+                                                       class="admin-datetime-input" aria-label="Дата и час на мача" />
+                                            }
+                                            else
+                                            {
+                                                @if (game.StartTime.HasValue)
+                                                {
+                                                    <span class="badge-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> @game.StartTime.Value.ToString("dd.MM.yyyy HH:mm")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge-pending">
+                                                        <i class="fas fa-hourglass-half" aria-hidden="true"></i> Очаква дата
+                                                    </span>
+                                                }
+                                            }
+                                        </div>
+
+                                        <div class="score-wrapper">
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <input name="s1" type="number" value="@game.TeamOneScore" class="score-input" aria-label="Вкарани голове от @game.TeamOne.Name">
+                                                <span class="score-divider">:</span>
+                                                <input name="s2" type="number" value="@game.TeamTwoScore" class="score-input" aria-label="Вкарани голове от @game.TeamTwo.Name">
+                                                
+                                                <button type="submit" class="save-score-btn" aria-label="Запази резултата за този мач" title="Запази">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <span class="score-display">@game.TeamOneScore</span>
+                                                <span class="score-divider">:</span>
+                                                <span class="score-display">@game.TeamTwoScore</span>
+                                            }
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="team-name team-right">
+                                    @game.TeamTwo.Name
+                                </div>
+                                
+                            </article>
+                        }
+                    </div>
+                </section>
+            }
+        }
+    </div>
+</main>

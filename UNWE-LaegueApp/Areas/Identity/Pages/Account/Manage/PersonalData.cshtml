@@ -1,0 +1,156 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Лични данни";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<style>
+    
+    .personal-data-wrapper {
+        margin-top: 0;
+    }
+
+        .personal-data-wrapper .form-card {
+            background-color: #001B3A;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 0;
+        }
+
+        .personal-data-wrapper .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .personal-data-wrapper .info-text {
+            color: #E2E8F0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .personal-data-wrapper .alert-box {
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #EF4444;
+            color: #FCA5A5;
+        }
+
+            .personal-data-wrapper .alert-box strong {
+                display: block;
+                font-size: 1.1rem;
+                margin-bottom: 0.3rem;
+                color: #FFFFFF;
+                text-transform: uppercase;
+            }
+
+        .personal-data-wrapper .actions-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .personal-data-wrapper .action-form {
+            margin: 0; 
+        }
+
+        .personal-data-wrapper .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            min-height: 48px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .personal-data-wrapper .btn-primary {
+            background: linear-gradient(90deg, #0284C7, #0369A1);
+            color: #FFFFFF;
+        }
+
+            .personal-data-wrapper .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
+                background: linear-gradient(90deg, #0369A1, #075985);
+            }
+
+        .personal-data-wrapper .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+
+            .personal-data-wrapper .btn-danger:hover {
+                background: #EF4444;
+                color: #FFFFFF;
+                box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+                border-color: #EF4444;
+                transform: translateY(-3px);
+            }
+
+    @@media (max-width: 600px) {
+        .personal-data-wrapper .actions-group {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .personal-data-wrapper .action-form,
+        .personal-data-wrapper .action-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="personal-data-wrapper">
+    <div class="form-card">
+        <h2 class="section-title"><span aria-hidden="true"></span> @ViewData["Title"]</h2>
+
+        <p class="info-text">
+            Вашият акаунт съдържа лични данни, които сте ни предоставили при регистрацията и използването на платформата. Тази страница ви позволява да изтеглите копие от тези данни или да ги изтриете.
+        </p>
+
+        <div class="alert-box alert-danger" role="alert">
+            <strong> Внимание!</strong>
+            Изтриването на тези данни ще премахне вашия акаунт завинаги и това действие е абсолютно необратимо.
+        </div>
+
+        <div class="actions-group">
+            <form id="download-data" asp-page="DownloadPersonalData" method="post" class="action-form">
+                <button class="action-btn btn-primary" type="submit">
+                    <span aria-hidden="true"></span> Изтегли данните
+                </button>
+            </form>
+            
+            <a id="delete" asp-page="DeletePersonalData" class="action-btn btn-danger">
+                <span aria-hidden="true"></span> Изтрий акаунта
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

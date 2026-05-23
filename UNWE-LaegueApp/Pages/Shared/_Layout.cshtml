@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject UNWE_LaegueApp.Data.ApplicationDbContext DbContext
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UNWE League</title>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UNWE_LaegueApp.styles.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <header class="main-header">
+        <nav class="main-nav" aria-label="Основна навигация">
+            <div class="nav-container">
+                
+                <a class="nav-brand" asp-area="" asp-page="/Index">УНСС ЛИГА</a>
+                
+                <button class="mobile-menu-toggle" aria-label="Отвори менюто" aria-expanded="false">
+                    <span aria-hidden="true">☰</span>
+                </button>
+
+                <div class="nav-links-wrapper">
+                    
+                    <ul class="nav-list">
+                       
+                        @if (User.IsInRole("Captain"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Team/ManageRequests">
+                                    <span aria-hidden="true"></span> Заявки
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Team/JoinTeam">Влез в отбор</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Team/CreateTeam">Създай отбор</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/League/Standings">
+                                <span aria-hidden="true"></span> Класиране
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/League/Schedule">
+                                <span aria-hidden="true"></span> Програма
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/League/LeagueInfo">
+                                <span aria-hidden="true"></span> Сезони
+                            </a>
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            var userId = UserManager.GetUserId(User);
+                            var notifCount = DbContext.JoinRequests.Count(r => r.UserId == userId && r.Status != "Pending");
+
+                            <li class="nav-item">
+                                <a class="nav-link notification-link" asp-page="/Team/Notifications">
+                                    <span aria-hidden="true"></span> Известия
+                                    @if (notifCount > 0)
+                                    {
+                                        <span class="notif-badge">@notifCount</span>
+                                    }
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Profile/MyProfile">
+                                    <span aria-hidden="true"></span> Профил
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item admin-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/AdminIndex">Админ</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="nav-list nav-right-list">
+                        <li class="nav-item identity-partial">
+                            <partial name="_LoginPartial" />
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content-wrapper">
+        @RenderBody()
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="footer-info">
+                <h3>УНСС ЛИГА</h3>
+                <p>Официална платформа за управление на университетската футболна лига.</p>
+            </div>
+            
+            <nav class="footer-links" aria-label="Бързи връзки">
+                <ul>
+                    <li><a asp-area="" asp-page="/Privacy">Политика за поверителност</a></li>
+                    <li><a asp-area="" asp-page="/League/Standings">Класиране</a></li>
+                    <li><a asp-area="" asp-page="/Contact">Контакти</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Посетете нашата Facebook страница">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Посетете нашия Instagram профил">
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="Посетете нашия TikTok профил">
+                    <i class="fab fa-tiktok" aria-hidden="true"></i>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                &copy; @DateTime.Now.Year - УНСС ЛИГА. Димитър Гемеджиев фак.№ 22180023.
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

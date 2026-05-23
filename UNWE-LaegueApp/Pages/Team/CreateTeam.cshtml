@@ -1,0 +1,53 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Team.CreateTeamModel
+@{
+    ViewData["Title"] = "Създай отбор";
+}
+
+<link rel="stylesheet" href="~/css/createteam.css" asp-append-version="true" />
+
+<main class="create-main-container">
+    <div class="create-card">
+        
+        <header class="create-header">
+            <h1 class="create-title">
+                <span aria-hidden="true"></span> Създай нов отбор
+            </h1>
+            <p class="create-subtitle">Дай име на твоя отбор и започни пътя към върха на лигата.</p>
+        </header>
+
+        <div class="create-body">
+            <form method="post" class="create-form">
+                
+                <div asp-validation-summary="ModelOnly" class="error-summary" role="alert"></div>
+                
+                <div class="form-group">
+                    <label asp-for="Team.Name" class="form-label">Име на отбора</label>
+                    <div class="input-wrapper">
+                        @* <i class="fas fa-trophy input-icon" aria-hidden="true"></i> *@
+                        <input asp-for="Team.Name" class="custom-input" placeholder="Въведи име тук..." aria-required="true" />
+                    </div>
+                    <span asp-validation-for="Team.Name" class="error-text" role="alert"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i> Създай отбор
+                    </button>
+                    
+                    <a href="/Admin/AdminIndex" class="cancel-link">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Отказ и връщане назад
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

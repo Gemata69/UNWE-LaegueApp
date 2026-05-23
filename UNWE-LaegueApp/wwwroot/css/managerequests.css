@@ -1,0 +1,214 @@
+﻿.requests-main {
+    max-width: 1000px;
+    margin: 2rem auto 5rem;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+    color: #F0F4F8;
+}
+
+:focus-visible {
+    outline: 3px solid #FFBB00 !important;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.requests-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.highlight-blue {
+    color: #00A8FF;
+}
+
+.request-badge {
+    background-color: #00A8FF;
+    color: #050505; 
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.header-divider {
+    border: none;
+    height: 1px;
+    background: rgba(0, 168, 255, 0.2);
+    margin-bottom: 2rem;
+}
+
+.status-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    background-color: #001B3A;
+    border: 1px solid rgba(0, 168, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.status-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.status-card p {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.warning-card .status-icon {
+    color: #FFBB00;
+}
+
+.info-card .status-icon {
+    color: #00A8FF;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; 
+}
+
+.requests-table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 12px; 
+}
+
+    .requests-table th {
+        color: #A0B0C0;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0 20px 10px;
+        border-bottom: 2px solid rgba(0, 168, 255, 0.2);
+        text-align: left;
+    }
+
+    .requests-table .align-right {
+        text-align: right;
+    }
+
+.request-row td {
+    background-color: #001B3A; 
+    padding: 20px;
+    border-top: 1px solid rgba(0, 168, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 168, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .request-row td:first-child {
+        border-left: 4px solid #00A8FF; 
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .request-row td:last-child {
+        border-right: 1px solid rgba(0, 168, 255, 0.1);
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+.request-row:hover td {
+    background-color: #002244;
+}
+
+.candidate-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.candidate-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #00A8FF, #003366);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 168, 255, 0.3);
+}
+
+.candidate-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.candidate-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.candidate-email {
+    font-size: 0.9rem;
+    color: #A0B0C0;
+    margin-top: 2px;
+}
+
+.actions-form {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.accept-btn {
+    background-color: #00E676; 
+    color: #050505;
+    border: none;
+}
+
+    .accept-btn:hover {
+        background-color: #00C853;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+    }
+
+.reject-btn {
+    background-color: transparent;
+    color: #FF4D4D; 
+    border: 2px solid #FF4D4D;
+}
+
+    .reject-btn:hover {
+        background-color: #FF4D4D;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 77, 77, 0.2);
+    }

@@ -1,0 +1,141 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Основен профил";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<style>
+    
+    .index-content-wrapper {
+        margin-bottom: 20px; 
+    }
+
+    .index-content-wrapper .form-card {
+        background-color: #001B3A;
+        border-radius: 12px;
+        padding: 2.5rem;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        margin-top: 0;
+    }
+
+    .index-content-wrapper .section-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .index-content-wrapper .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .index-content-wrapper .form-label {
+        display: block;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin-bottom: 0.6rem;
+        font-size: 1rem;
+    }
+
+    .index-content-wrapper .custom-input {
+        width: 100%;
+        background-color: #050505;
+        color: #FFFFFF;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        padding: 14px 18px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        min-height: 48px; 
+        transition: all 0.3s ease;
+    }
+
+    .index-content-wrapper .custom-input:focus {
+        outline: none;
+        border-color: #38BDF8;
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .index-content-wrapper .custom-input:disabled {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #CBD5E1;
+        border-color: rgba(255, 255, 255, 0.05);
+        cursor: not-allowed;
+        opacity: 1;
+    }
+
+    .index-content-wrapper .submit-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(90deg, #0284C7, #0369A1);
+        color: #FFFFFF;
+        border: none;
+        padding: 16px;
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-height: 48px;
+    }
+
+    .index-content-wrapper .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
+        background: linear-gradient(90deg, #0369A1, #075985);
+    }
+
+    .index-content-wrapper .text-danger {
+        color: #F87171 !important;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+        display: block;
+    }
+</style>
+
+<div class="index-content-wrapper">
+    <div class="form-card">
+        <h2 class="section-title"><span aria-hidden="true"></span> @ViewData["Title"]</h2>
+
+        <partial name="_StatusMessage" for="StatusMessage" />
+
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            
+            <div class="form-group">
+                <label asp-for="Username" class="form-label">Потребителско име</label>
+                <div class="input-wrapper">
+                    <input asp-for="Username" class="custom-input" placeholder="Избор на потребителско име..." disabled />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber" class="form-label">Телефонен номер</label>
+                <div class="input-wrapper">
+                    <input asp-for="Input.PhoneNumber" class="custom-input" placeholder="Въведете телефонен номер..." />
+                </div>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <button id="update-profile-button" type="submit" class="submit-btn mt-3">
+                <span aria-hidden="true"></span> Запази промените
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

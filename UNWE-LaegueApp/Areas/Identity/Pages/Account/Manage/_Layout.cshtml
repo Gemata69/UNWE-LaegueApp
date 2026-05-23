@@ -1,0 +1,33 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="~/css/accountlayout.css" asp-append-version="true" />
+
+<main class="manage-container">
+    <header class="manage-header">
+        <h1 class="page-title">Управление на акаунта</h1>
+        <p class="page-subtitle">Промяна на настройките на вашия профил</p>
+    </header>
+
+    <div class="manage-grid">
+        <aside class="manage-sidebar" aria-label="Навигация на профила">
+            <partial name="_ManageNav" />
+        </aside>
+
+        <section class="manage-content" aria-label="Настройки на профила">
+            @RenderBody()
+        </section>
+    </div>
+</main>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

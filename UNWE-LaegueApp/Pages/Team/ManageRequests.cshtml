@@ -1,0 +1,85 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Team.ManageRequestsModel
+@{
+    ViewData["Title"] = "Управление на заявки";
+}
+
+<link rel="stylesheet" href="~/css/managerequests.css" asp-append-version="true" />
+
+<main class="requests-main">
+    
+    <header class="requests-header">
+        <h1 class="page-title">
+            <span aria-hidden="true"></span> Заявки за <span class="highlight-blue">@(Model.MyTeam?.Name ?? "твоя отбор")</span>
+        </h1>
+        <span class="request-badge" aria-label="Имате @Model.Requests.Count чакащи заявки">
+            @Model.Requests.Count чакащи
+        </span>
+    </header>
+    
+    <hr class="header-divider" />
+
+    @if (Model.MyTeam == null)
+    {
+        <div class="status-card warning-card" role="alert">
+            <i class="fas fa-exclamation-triangle status-icon" aria-hidden="true"></i>
+            <p>Не открихме отбор, на който да сте капитан.</p>
+        </div>
+    }
+    else if (!Model.Requests.Any())
+    {
+        <div class="status-card info-card" role="alert">
+            <i class="fas fa-inbox status-icon" aria-hidden="true"></i>
+            <p>В момента нямате чакащи заявки. Когато някой поиска да се присъедини, ще се появи тук.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-wrapper">
+            <table class="requests-table" aria-label="Списък със заявки за присъединяване към отбора">
+                <thead>
+                    <tr>
+                        <th scope="col">Кандидат</th>
+                        <th scope="col" class="align-right">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model.Requests)
+                    {
+                        Model.Profiles.TryGetValue(request.UserId, out var profile);
+                        
+                        string displayName = profile != null ? profile.FullName : "Профилът не е попълнен";
+                        string initials = profile != null ? $"{profile.FirstName[0]}{profile.LastName[0]}" : "?";
+
+                        <tr class="request-row">
+                            <td class="candidate-cell">
+                                <div class="candidate-info">
+                                    <div class="candidate-avatar" aria-hidden="true">
+                                        @initials
+                                    </div>
+                                    <div class="candidate-details">
+                                        <span class="candidate-name">@displayName</span>
+                                        <span class="candidate-email">@request.UserEmail</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="actions-cell align-right">
+                                <form method="post" class="actions-form">
+                                    <input type="hidden" name="requestId" value="@request.Id" />
+                                    
+                                    <button type="submit" asp-page-handler="Accept" class="action-btn accept-btn" aria-label="Приеми заявката на @displayName">
+                                        <i class="fas fa-check" aria-hidden="true"></i> Приеми
+                                    </button>
+                                    
+                                    <button type="submit" asp-page-handler="Reject" class="action-btn reject-btn" aria-label="Отхвърли заявката на @displayName">
+                                        <i class="fas fa-times" aria-hidden="true"></i> Отхвърли
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</main>

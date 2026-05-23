@@ -1,0 +1,73 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.League.StandingsModel
+@{
+    ViewData["Title"] = "Класиране";
+}
+
+<link rel="stylesheet" href="~/css/standings.css" asp-append-version="true" />
+
+<main class="standings-main-container">
+    <div class="standings-card">
+        
+        <header class="standings-header">
+            <h1 class="standings-title">
+                <span aria-hidden="true"></span> Генерално Класиране
+            </h1>
+        </header>
+
+        <div class="table-responsive-wrapper" tabindex="0" aria-label="Таблица с класирането. Използвайте стрелките за превъртане, ако е необходимо.">
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-rank text-center">#</th>
+                        <th scope="col" class="col-team">Отбор</th>
+                        <th scope="col" class="text-center"><abbr title="Изиграни мачове">М</abbr></th>
+                        <th scope="col" class="text-center"><abbr title="Победи">П</abbr></th>
+                        <th scope="col" class="text-center"><abbr title="Равенства">Р</abbr></th>
+                        <th scope="col" class="text-center"><abbr title="Загуби">З</abbr></th>
+                        <th scope="col" class="text-center hide-mobile"><abbr title="Вкарани голове">ВГ</abbr></th>
+                        <th scope="col" class="text-center hide-mobile"><abbr title="Допуснати голове">ДГ</abbr></th>
+                        <th scope="col" class="text-center"><abbr title="Голова разлика">ГР</abbr></th>
+                        <th scope="col" class="text-center col-points"><abbr title="Точки">Т</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var team in Model.Standings)
+                    {
+                        string rankClass = team.Rank == 1 ? "rank-gold" :
+                                           team.Rank == 2 ? "rank-silver" :
+                                           team.Rank == 3 ? "rank-bronze" : "";
+
+                        <tr class="standings-row @rankClass">
+                            <td class="text-center rank-cell">
+                                <span class="rank-number">@team.Rank</span>
+                            </td>
+                
+                            <td class="team-cell">
+                                <a asp-page="/League/Details" asp-route-id="@team.TeamId" class="team-link">
+                                    @team.TeamName
+                                </a>
+                            </td>
+                
+                            <td class="text-center stat-played">@team.MatchesPlayed</td>
+                            <td class="text-center stat-win">@team.Wins</td>
+                            <td class="text-center stat-draw">@team.Draws</td>
+                            <td class="text-center stat-loss">@team.Losses</td>
+                            <td class="text-center hide-mobile">@team.GoalsFor</td>
+                            <td class="text-center hide-mobile">@team.GoalsAgainst</td>
+                            
+                            <td class="text-center stat-gd @(team.GoalDifference > 0 ? "gd-positive" : (team.GoalDifference < 0 ? "gd-negative" : "gd-neutral"))">
+                                @(team.GoalDifference > 0 ? "+" + team.GoalDifference : team.GoalDifference.ToString())
+                            </td>
+                            
+                            <td class="text-center points-cell">
+                                @team.Points
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>

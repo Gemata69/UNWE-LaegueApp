@@ -1,0 +1,92 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.League.LeagueInfoModel
+@{
+    ViewData["Title"] = "Информация за лигите";
+}
+
+<link rel="stylesheet" href="~/css/leagueinfo.css" asp-append-version="true" />
+
+<main class="league-main-container">
+    
+    <header class="league-page-header">
+        <h1 class="page-title">
+            <span aria-hidden="true"></span> Информация за лигите
+        </h1>
+        
+        <form method="post" asp-page-handler="ExportToExcel">
+            <button type="submit" class="excel-download-btn" aria-label="Изтегли информацията за всички лиги и сезони в Excel формат">
+                <i class="fas fa-file-excel" aria-hidden="true"></i> Изтегли в Excel
+            </button>
+        </form>
+    </header>
+
+    <div class="leagues-list">
+        
+        @if (!Model.Leagues.Any())
+        {
+            <div class="empty-state-card" role="alert">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p>В момента няма създадени лиги. Администраторът трябва да добави първата лига.</p>
+            </div>
+        }
+
+        @foreach (var league in Model.Leagues)
+        {
+            <article class="league-card" aria-labelledby="league-title-@league.Id">
+                
+                <header class="league-card-header">
+                    <h2 id="league-title-@league.Id" class="league-name">
+                        <span aria-hidden="true"></span> @league.Name
+                    </h2>
+                    <span class="teams-limit-badge" aria-label="Максимален брой отбори: @league.MaxTeams">
+                        Макс. отбори: @league.MaxTeams
+                    </span>
+                </header>
+
+                <div class="seasons-grid">
+                    
+                    <div class="season-box season-autumn">
+                        <h3 class="season-title"><span aria-hidden="true"></span> Сезон 1 (Есен)</h3>
+                        <div class="season-dates">
+                            <p>
+                                <span class="date-label">Начало:</span>
+                                <span class="date-value">@(league.SeasonOne?.StartDate.Year > 1 ? league.SeasonOne?.StartDate.ToString("dd.MM.yyyy") : "Не е въведено")</span>
+                            </p>
+                            <p>
+                                <span class="date-label">Край:</span>
+                                <span class="date-value">@(league.SeasonOne?.EndDate.Year > 1 ? league.SeasonOne?.EndDate.ToString("dd.MM.yyyy") : "Не е въведено")</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="season-box season-spring">
+                        <h3 class="season-title"><span aria-hidden="true"></span> Сезон 2 (Пролет)</h3>
+                        <div class="season-dates">
+                            <p>
+                                <span class="date-label">Начало:</span>
+                                <span class="date-value">@(league.SeasonTwo?.StartDate.Year > 1 ? league.SeasonTwo?.StartDate.ToString("dd.MM.yyyy") : "Не е въведено")</span>
+                            </p>
+                            <p>
+                                <span class="date-label">Край:</span>
+                                <span class="date-value">@(league.SeasonTwo?.EndDate.Year > 1 ? league.SeasonTwo?.EndDate.ToString("dd.MM.yyyy") : "Не е въведено")</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="admin-actions">
+                        <form method="post" asp-page-handler="DeleteLeague" onsubmit="return confirm('СИГУРНИ ЛИ СТЕ? Това ще изтрие Лигата и нейните сезони ЗАВИНАГИ!');">
+                            <input type="hidden" name="leagueId" value="@league.Id" />
+                            <button type="submit" class="delete-league-btn" aria-label="Изтрий лига @league.Name и всичките ѝ данни">
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i> Изтрий Лигата
+                            </button>
+                        </form>
+                    </div>
+                }
+            </article>
+        }
+    </div>
+</main>

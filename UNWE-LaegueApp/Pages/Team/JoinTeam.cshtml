@@ -1,0 +1,77 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Team.JoinTeamModel
+@{
+    ViewData["Title"] = "Присъедини се към отбор";
+}
+
+<link rel="stylesheet" href="~/css/jointeam.css" asp-append-version="true" />
+
+<main class="join-main-container">
+    <div class="join-content-wrapper">
+
+        @if (Model.IsAlreadyInTeam)
+        {
+            <div class="status-card warning-card" role="alert">
+                <div class="status-icon-wrapper">
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <h1 class="status-title">Вече сте част от отбор <span class="highlight-warning">@Model.CurrentTeamName</span>!</h1>
+                <p class="status-text">Според правилата на лигата нямате право да участвате в повече от един отбор едновременно.</p>
+                
+                <a asp-page="/Index" class="action-btn warning-btn">
+                    <i class="fas fa-home" aria-hidden="true"></i> Към началната страница
+                </a>
+            </div>
+        }
+        
+        else if (Model.IsSuccess)
+        {
+            <div class="status-card success-card" role="alert">
+                <div class="status-icon-wrapper">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                </div>
+                <h1 class="status-title">Заявката е изпратена успешно!</h1>
+                <p class="status-text">Капитанът на отбора ще разгледа вашата кандидатура скоро.</p>
+                
+                <a asp-page="/Index" class="action-btn success-btn">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i> Обратно в сайта
+                </a>
+            </div>
+        }
+        
+        else
+        {
+            <div class="join-card">
+                <header class="join-header">
+                    <h1 class="join-title">
+                        <span aria-hidden="true"></span> Присъедини се към отбор
+                    </h1>
+                    <p class="join-subtitle">Избери отбор от списъка по-долу и изпрати своята заявка на капитана, за да станеш официален играч.</p>
+                </header>
+                
+                <div class="join-body">
+                    <form method="post" class="join-form">
+                        
+                        <div asp-validation-summary="ModelOnly" class="error-summary" role="alert"></div>
+                        
+                        <div class="form-group">
+                            <label for="teamSelect" class="form-label">Свободни отбори:</label>
+                            
+                            <div class="select-wrapper">
+                                <select id="teamSelect" asp-for="SelectedTeamId" asp-items="Model.TeamOptions" class="custom-select" required aria-required="true">
+                                    <option value="">-- Избери своя отбор --</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-icon" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Изпрати заявка
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+    </div>
+</main>

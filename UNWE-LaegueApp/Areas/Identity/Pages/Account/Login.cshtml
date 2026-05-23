@@ -1,0 +1,90 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+
+<main class="auth-main-container">
+    <div class="auth-card">
+        
+        <header class="auth-header">
+            <h1 class="auth-title">
+                <span aria-hidden="true"></span> Вход в системата
+            </h1>
+            <p class="auth-subtitle">Добре дошли отново в UNWE League!</p>
+        </header>
+
+        <div class="auth-body @(Model.ExternalLogins?.Count > 0 ? "auth-split" : "")">
+            
+            <section class="auth-local">
+                <form id="account" method="post" class="auth-form">
+                    
+                    <div asp-validation-summary="ModelOnly" class="error-summary"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Input.Email" class="form-label">Имейл</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                            <input asp-for="Input.Email" class="custom-input" autocomplete="username" required placeholder="name@example.com" />
+                        </div>
+                        <span asp-validation-for="Input.Email" class="error-text"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Input.Password" class="form-label">Парола</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon" aria-hidden="true"></i>
+                            <input asp-for="Input.Password" class="custom-input" autocomplete="current-password" required placeholder="Въведете парола..." />
+                        </div>
+                        <span asp-validation-for="Input.Password" class="error-text"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label asp-for="Input.RememberMe" class="checkbox-label">
+                            <input class="custom-checkbox" asp-for="Input.RememberMe" />
+                            <span class="checkbox-text">Запомни ме</span>
+                        </label>
+                    </div>
+
+                    <button id="login-submit" type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Влез в профила
+                    </button>
+
+                    <div class="auth-links">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="auth-link">Забравена парола?</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="auth-link highlight-link">Нямате профил? Регистрирайте се</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="auth-link muted-link">Изпрати отново имейл за потвърждение</a>
+                    </div>
+                </form>
+            </section>
+
+            @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+            {
+                <div class="auth-divider">
+                    <span aria-hidden="true">ИЛИ</span>
+                </div>
+
+                <section class="auth-external">
+                    <h3 class="external-title">Вход чрез друга услуга</h3>
+                    
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="external-buttons">
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="external-btn" name="provider" value="@provider.Name" aria-label="Вход чрез @provider.DisplayName">
+                                    <i class="fab fa-@(provider.Name.ToLower()) external-icon" aria-hidden="true"></i> Влез с @provider.DisplayName
+                                </button>
+                            }
+                        </div>
+                    </form>
+                </section>
+            }
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

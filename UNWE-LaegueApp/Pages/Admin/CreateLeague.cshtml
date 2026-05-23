@@ -1,0 +1,98 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Admin.CreateLeagueModel
+@{
+    ViewData["Title"] = "Създай нова лига";
+}
+
+<link rel="stylesheet" href="~/css/createleague.css" asp-append-version="true" />
+
+<main class="admin-create-container">
+    <header class="admin-page-header">
+        <h1 class="page-title">
+            <span aria-hidden="true">🏆</span> Създаване на нова Лига
+        </h1>
+        <p class="page-subtitle">Въведи параметрите за новия сезон в системата.</p>
+    </header>
+
+    <form method="post" class="create-league-form">
+        
+        <section class="admin-card primary-card">
+            <header class="card-header bg-blue">
+                <h2 class="card-title">Основни данни</h2>
+            </header>
+            <div class="card-body form-grid-2">
+                <div class="form-group span-2-cols">
+                    <label asp-for="LeagueName" class="form-label">Име на Лигата (напр. "Сезон 2026/2027")</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-heading input-icon" aria-hidden="true"></i>
+                        <input asp-for="LeagueName" class="custom-input" placeholder="Въведете име..." required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxTeams" class="form-label">Максимум Отбори</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-users input-icon" aria-hidden="true"></i>
+                        <input asp-for="MaxTeams" type="number" class="custom-input" placeholder="Напр. 16" required min="2" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="seasons-grid">
+            
+            <section class="admin-card warning-card">
+                <header class="card-header bg-orange">
+                    <h2 class="card-title"><span aria-hidden="true">🍂</span> Сезон 1 (Есен)</h2>
+                </header>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Season1Start" class="form-label">Начална дата</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-alt input-icon" aria-hidden="true"></i>
+                            <input asp-for="Season1Start" type="date" class="custom-input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Season1End" class="form-label">Крайна дата</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-check input-icon" aria-hidden="true"></i>
+                            <input asp-for="Season1End" type="date" class="custom-input" required />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="admin-card success-card">
+                <header class="card-header bg-green">
+                    <h2 class="card-title"><span aria-hidden="true">🌷</span> Сезон 2 (Пролет)</h2>
+                </header>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Season2Start" class="form-label">Начална дата</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-alt input-icon" aria-hidden="true"></i>
+                            <input asp-for="Season2Start" type="date" class="custom-input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Season2End" class="form-label">Крайна дата</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-check input-icon" aria-hidden="true"></i>
+                            <input asp-for="Season2End" type="date" class="custom-input" required />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="form-actions mt-4">
+            <button type="submit" class="submit-btn btn-lg">
+                <i class="fas fa-save" aria-hidden="true"></i> Създай Лигата
+            </button>
+            <a asp-page="./AdminIndex" class="cancel-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> Отказ и връщане назад
+            </a>
+        </div>
+    </form>
+</main>

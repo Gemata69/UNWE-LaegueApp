@@ -1,0 +1,27 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Admin.ManageSeasonModel
+@{
+    ViewData["Title"] = "Управление на Сезона";
+}
+<link rel="stylesheet" href="~/css/manageseason.css" asp-append-version="true" />
+
+<main class="manage-season-container">
+    <section class="action-card">
+        
+        <h2 class="action-title">
+            <span aria-hidden="true" class="giant-icon">⚙️</span><br />
+            Управление на Сезона
+        </h2>
+        
+        <p class="action-description">
+            Натиснете бутона, за да генерирате автоматично всички мачове за 12-те отбора.
+        </p>
+
+        <form method="post" asp-page-handler="Generate" onsubmit="return confirm('СИГУРНИ ЛИ СТЕ? Това ще генерира стотици мачове в базата данни и е необратим процес!');">
+            <button type="submit" class="generate-btn">
+                <span aria-hidden="true" class="btn-icon">🚀</span> Генерирай Пълна Програма
+            </button>
+        </form>
+
+    </section>
+</main>

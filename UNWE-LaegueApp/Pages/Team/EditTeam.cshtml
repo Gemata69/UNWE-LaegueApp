@@ -1,0 +1,29 @@
+﻿@page "{id:int}"
+@model UNWE_LaegueApp.Pages.Admin.EditTeamModel
+@{
+    ViewData["Title"] = "Редактиране на отбор";
+}
+
+<div class="container mt-4">
+    <h2> Редактиране на отбор</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <input type="hidden" asp-for="Team.Id" />
+                
+                <div class="mb-3">
+                    <label asp-for="Team.Name" class="form-label fw-bold">Име на отбора:</label>
+                    <input asp-for="Team.Name" class="form-control" />
+                    <span asp-validation-for="Team.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Запази промените</button>
+                    <a asp-page="./AdminIndex" class="btn btn-secondary">Отказ</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

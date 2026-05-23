@@ -1,0 +1,81 @@
+﻿@page
+@model UNWE_LaegueApp.Pages.Profile.MyProfileModel
+@{
+    ViewData["Title"] = "Моят Профил";
+}
+
+<link rel="stylesheet" href="~/css/myprofile.css" asp-append-version="true" />
+
+<main class="profile-main-container">
+    <div class="profile-card">
+        
+        <header class="profile-header">
+            <h1 class="profile-title">
+                <span aria-hidden="true"></span> Личен Профил
+            </h1>
+            <p class="profile-subtitle">Управлявай своите лични данни в системата на лигата.</p>
+        </header>
+
+        <div class="profile-body">
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert-banner alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+                    <div>
+                        <strong>Внимание!</strong> @TempData["ErrorMessage"]
+                    </div>
+                </div>
+            }
+
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert-banner alert-success" role="alert">
+                    <i class="fas fa-check-circle alert-icon" aria-hidden="true"></i>
+                    <div>
+                        <strong>✅ Готово!</strong> @TempData["Message"]
+                    </div>
+                </div>
+            }
+
+            <form method="post" class="profile-form">
+                <input type="hidden" asp-for="UserProfile.UserId" />
+
+                <div class="form-group">
+                    <label asp-for="UserProfile.FirstName" class="form-label">Име</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                        <input asp-for="UserProfile.FirstName" class="custom-input" placeholder="Въведете име..." required aria-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserProfile.MiddleName" class="form-label">Презиме</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-id-card input-icon" aria-hidden="true"></i>
+                        <input asp-for="UserProfile.MiddleName" class="custom-input" placeholder="Въведете презиме..." required aria-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserProfile.LastName" class="form-label">Фамилия</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-users input-icon" aria-hidden="true"></i>
+                        <input asp-for="UserProfile.LastName" class="custom-input" placeholder="Въведете фамилия..." required aria-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save" aria-hidden="true"></i> Запази Промените
+                    </button>
+                    
+                    <a asp-page="/Index" class="cancel-link">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Обратно към началната страница
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

@@ -1,0 +1,61 @@
+﻿@page "{id:int}"
+@model UNWE_LaegueApp.Pages.Team.TeamViewModel
+
+<style>
+    .team-container { font-family: sans-serif; margin: 20px; }
+    .team-header { border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+    .info-box { background-color: #f4f4f4; padding: 15px; border: 1px solid #ddd; width: 300px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+    th { background-color: #eee; }
+    .captain-label { color: darkgreen; font-weight: bold; }
+    .back-link { display: inline-block; margin-top: 20px; text-decoration: none; color: blue; }
+</style>
+
+<div class="team-container">
+    <div class="team-header">
+        <h1>Team: @Model.Team.Name</h1>
+    </div>
+
+    <div class="info-box">
+        <h3>Team Info</h3>
+        <p><strong>Team ID:</strong> @Model.Team.Id</p>
+        <p><strong>Captain:</strong> 
+            <span class="captain-label">
+                @(Model.Team.Captain?.Name ?? "No Captain Assigned")
+            </span>
+        </p>
+    </div>
+
+    <h2>Player Roster</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>Full Name</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in Model.Team.Players)
+            {
+                <tr>
+                    <td>@player.Id</td>
+                    <td>@player.Name</td>
+                    <td>
+                        @if(player.Captain) 
+                        {
+                            <span class="captain-label">Captain</span>
+                        }
+                        else 
+                        {
+                            <span>Player</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/AdminIndex" class="back-link">← Return to Admin Panel</a>
+</div>

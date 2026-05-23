@@ -1,0 +1,243 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Features
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "Двуфакторна автентикация (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<style>
+    
+    .two-factor-wrapper {
+        margin-top: 0;
+    }
+
+        .two-factor-wrapper .form-card {
+            background-color: #001B3A;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 0;
+        }
+
+        .two-factor-wrapper .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .two-factor-wrapper .sub-section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #E2E8F0;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .two-factor-wrapper .alert-box {
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+            .two-factor-wrapper .alert-box strong {
+                display: block;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+                color: #FFFFFF;
+            }
+
+            .two-factor-wrapper .alert-box p {
+                margin: 0;
+                font-size: 0.95rem;
+            }
+
+            .two-factor-wrapper .alert-box a {
+                text-decoration: underline;
+                font-weight: 700;
+                transition: opacity 0.2s;
+            }
+
+                .two-factor-wrapper .alert-box a:hover {
+                    opacity: 0.8;
+                }
+
+        .two-factor-wrapper .alert-danger {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #EF4444;
+            color: #FCA5A5;
+        }
+
+            .two-factor-wrapper .alert-danger a {
+                color: #FECACA;
+            }
+
+        .two-factor-wrapper .alert-warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            border-left: 4px solid #F59E0B;
+            color: #FCD34D;
+        }
+
+            .two-factor-wrapper .alert-warning a {
+                color: #FDE68A;
+            }
+
+        .two-factor-wrapper .actions-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .two-factor-wrapper .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            min-height: 48px; 
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .two-factor-wrapper .btn-primary {
+            background: linear-gradient(90deg, #0284C7, #0369A1);
+            color: #FFFFFF;
+        }
+
+            .two-factor-wrapper .btn-primary:hover {
+                background: linear-gradient(90deg, #0369A1, #075985);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(2, 132, 199, 0.4);
+            }
+
+        .two-factor-wrapper .btn-secondary {
+            background: transparent;
+            color: #38BDF8;
+            border: 2px solid rgba(56, 189, 248, 0.5);
+        }
+
+            .two-factor-wrapper .btn-secondary:hover {
+                background: rgba(56, 189, 248, 0.1);
+                color: #FFFFFF;
+                border-color: #38BDF8;
+            }
+
+        .two-factor-wrapper .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+
+            .two-factor-wrapper .btn-danger:hover {
+                background: #EF4444;
+                color: #FFFFFF;
+                box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            }
+
+    @@media (max-width: 600px) {
+        .two-factor-wrapper .action-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="two-factor-wrapper">
+    <div class="form-card">
+        <h2 class="section-title"><span aria-hidden="true"></span> @ViewData["Title"]</h2>
+        <partial name="_StatusMessage" for="StatusMessage" />
+
+        @{
+            var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+            @if (consentFeature?.CanTrack ?? true)
+            {
+                @if (Model.Is2faEnabled)
+                {
+                    if (Model.RecoveryCodesLeft == 0)
+                    {
+                        <div class="alert-box alert-danger" role="alert">
+                            <strong>Нямате останали кодове за възстановяване.</strong>
+                            <p>Трябва да <a asp-page="./GenerateRecoveryCodes">генерирате нов набор от кодове</a>, преди да можете да влезете с код за възстановяване.</p>
+                        </div>
+                    }
+                    else if (Model.RecoveryCodesLeft == 1)
+                    {
+                        <div class="alert-box alert-danger" role="alert">
+                            <strong>Остава ви 1 код за възстановяване.</strong>
+                            <p>Можете да <a asp-page="./GenerateRecoveryCodes">генерирате нов набор от кодове за възстановяване</a>.</p>
+                        </div>
+                    }
+                    else if (Model.RecoveryCodesLeft <= 3)
+                    {
+                        <div class="alert-box alert-warning" role="alert">
+                            <strong>Остават ви @Model.RecoveryCodesLeft кода за възстановяване.</strong>
+                            <p>Препоръчително е да <a asp-page="./GenerateRecoveryCodes">генерирате нов набор от кодове</a> скоро.</p>
+                        </div>
+                    }
+
+                    <div class="actions-group">
+                        @if (Model.IsMachineRemembered)
+                        {
+                            <form method="post" style="display: inline-block">
+                                <button type="submit" class="action-btn btn-secondary">
+                                    <span aria-hidden="true"></span> Забрави този браузър
+                                </button>
+                            </form>
+                        }
+                        <a asp-page="./Disable2fa" class="action-btn btn-danger">
+                            <span aria-hidden="true"></span> Деактивиране на 2FA
+                        </a>
+                        <a asp-page="./GenerateRecoveryCodes" class="action-btn btn-secondary">
+                            <span aria-hidden="true"></span> Нулиране на кодовете
+                        </a>
+                    </div>
+                }
+
+                <h3 class="sub-section-title">Удостоверително приложение</h3>
+                <div class="actions-group">
+                    @if (!Model.HasAuthenticator)
+                    {
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="action-btn btn-primary">
+                            <span aria-hidden="true"></span> Добавяне на приложение
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="action-btn btn-primary">
+                            <span aria-hidden="true"></span> Настройка на приложението
+                        </a>
+                        <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="action-btn btn-secondary">
+                            <span aria-hidden="true"></span> Нулиране на приложението
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert-box alert-danger" role="alert">
+                    <strong>Политиката за поверителност и бисквитки не е приета.</strong>
+                    <p>Трябва да приемете политиката, преди да можете да активирате двуфакторната автентикация.</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

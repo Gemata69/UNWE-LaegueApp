@@ -1,0 +1,192 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Начало";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+
+
+<main class="home-page">
+    
+    <section class="hero-section" aria-label="Галерия на лигата">
+        
+        <div class="slider-wrapper">
+            <div class="slides-track" id="slidesTrack">
+                
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070&auto=format');">
+                    <div class="slide-content">
+                        <h1>УНСС ЛИГА — Новата ера на футбола</h1>
+                        <p>Анализи, статистики, лиги и фенска общност на едно място.</p>
+                    </div>
+                </div>
+                
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2070&auto=format');">
+                    <div class="slide-content">
+                        <h1>Следи всяко движение</h1>
+                        <p>Реални резултати и професионални статистики за всеки отбор и играч.</p>
+                    </div>
+                </div>
+                
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=2070&auto=format');">
+                    <div class="slide-content">
+                        <h1>Стани част от общността</h1>
+                        <p>Създай своя отбор, предизвикай приятели и се състезавай във висша лига.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="slider-arrow arrow-left" id="btnPrev" aria-label="Предишна снимка">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="slider-arrow arrow-right" id="btnNext" aria-label="Следваща снимка">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+
+            <div class="slider-dots" id="dotsWrapper" role="tablist"></div>
+        </div>
+
+        <a href="#aboutSection" class="scroll-down-btn" aria-label="Премини към секция За нас">
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </a>
+
+    </section>
+
+    <section class="about-section" id="aboutSection" aria-labelledby="about-heading">
+        <div class="about-container">
+            
+            <div class="about-text-area">
+                <h2 id="about-heading">За <span class="blue-text">УНСС ЛИГА</span></h2>
+                <p>Ние вярваме, че футболът обединява хората, създава емоции и истински легенди. <strong>УНСС ЛИГА</strong> е платформата, която дава възможност на всеки фен, аматьорски отбор или професионалист да се потопи в света на съвременния футболен мениджмънт.</p>
+                
+                <blockquote class="quote-box">
+                    <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i> 
+                    "Там, където страстта среща иновациите — всеки мач е история, всяка статистика е оръжие. Присъедини се към хилядите, които вече трансформират начина, по който преживяват играта."
+                </blockquote>
+                
+                <p>С модерен интерфейс, детайлни таблици и система за прогнози – УНСС ЛИГА не е просто приложение, а твоят верен приятел по време на всеки уикенд мач.</p>
+                
+                <a asp-area="Identity" asp-page="/Account/Register" class="register-btn">
+                    <i class="fas fa-futbol" aria-hidden="true"></i> Регистрация сега
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            
+            <div class="about-stats-area">
+                <div class="stat-card">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Активни фенове</span>
+                    <hr class="stat-line">
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Екшън статистики</span>
+                    <hr class="stat-line">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const track = document.getElementById('slidesTrack');
+            const slides = document.querySelectorAll('.slide');
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+            const dotsWrapper = document.getElementById('dotsWrapper');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let autoInterval;
+            const DELAY = 3000; 
+
+            function updateSlider() {
+                if (!track) return;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIndex) {
+                        dot.classList.add('active');
+                        dot.setAttribute('aria-selected', 'true');
+                    } else {
+                        dot.classList.remove('active');
+                        dot.setAttribute('aria-selected', 'false');
+                    }
+                });
+            }
+
+            function createDots() {
+                dotsWrapper.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('dot');
+                    dot.setAttribute('role', 'tab');
+                    dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+                    if (i === currentIndex) dot.classList.add('active');
+                    
+                    dot.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateSlider();
+                        resetAutoPlay();
+                    });
+                    dotsWrapper.appendChild(dot);
+                }
+            }
+
+            function moveNext() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+                resetAutoPlay();
+            }
+
+            function movePrev() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+                resetAutoPlay();
+            }
+
+            function startAutoPlay() {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(moveNext, DELAY);
+            }
+
+            function resetAutoPlay() {
+                startAutoPlay();
+            }
+
+            if (btnPrev && btnNext) {
+                btnPrev.addEventListener('click', movePrev);
+                btnNext.addEventListener('click', moveNext);
+            }
+
+            if (slides.length > 0) {
+                createDots();
+                updateSlider();
+                startAutoPlay();
+                
+                const wrapper = document.querySelector('.slider-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', () => clearInterval(autoInterval));
+                    wrapper.addEventListener('mouseleave', startAutoPlay);
+                }
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') movePrev();
+                if (e.key === 'ArrowRight') moveNext();
+            });
+        });
+    </script>
+}
