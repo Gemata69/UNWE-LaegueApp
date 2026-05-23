@@ -1,0 +1,76 @@
+﻿.manage-season-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem;
+    background-color: #050505;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.action-card {
+    background-color: #001B3A;
+    border: 1px solid rgba(0, 168, 255, 0.2);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.action-title {
+    font-size: 1.8rem;
+    color: #00A8FF;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.giant-icon {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.action-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #E2E8F0;
+    margin-bottom: 2rem;
+}
+
+.generate-btn {
+    background-color: #D32F2F;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+    .generate-btn:hover {
+        background-color: #B71C1C;
+    }
+
+    .generate-btn:active {
+        transform: scale(0.98);
+    }
+
+    .generate-btn:focus-visible {
+        outline: 4px solid #FFBB00;
+        outline-offset: 4px;
+        background-color: #B71C1C;
+    }
+
+.btn-icon {
+    font-size: 1.2rem;
+}
